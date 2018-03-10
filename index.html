@@ -1,0 +1,265 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!--Add Normalize.css-->
+    <link rel="stylesheet" type="text/css" href="normalize.css">
+
+    <!--Add Bootstrap 4.0.0 CSS-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!--Add Google Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+
+    <!--Add custom CSS-->
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="weather-icons.min.css">
+
+    <!--Page Title-->
+    <title>Can I Drone?</title>
+</head>
+
+<body>
+
+    <div class="page-header">
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4">Can I Drone?</h1>
+                <p class="lead">Unsure if you should fly your drone today?</p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p>Our FlySafe algorithm is able to score your local weather conditions, maximising the safety of your drone. FlySafe can also give estimated scores for the week ahead!</p>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-sm-12 col-md-12 my-3">
+                <div class="input-group my-group">
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-6 padding-0">
+                            <input name="userLocation" type="text" id="userLocation" class="form-control" placeholder="Town/City">
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4 padding-0">
+                            <select class="selectpicker form-control" name="userCountry" id="userCountry" data-live-search="true">
+                                <option value="GB" selected="selected">United Kingdom</option>
+                                <option value="US">United States</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-2 padding-0">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-primary" onClick="loadWeather()">Can I Drone?</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="row">
+
+
+
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="localinfo_placeholder"></div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="FlySafeScore_placeholder"></div>
+
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" id="windspeed_placeholder"></div>
+
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" id="DSPrecipitationProbability_placeholder"></div>
+
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" id="temperature_placeholder"></div>
+
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" id="visibility_placeholder"></div>
+            
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" id="DSStormDistance_placeholder"></div>
+
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" id="DSCloudCover_placeholder"></div>
+
+
+            <div id="lastupdate_placeholder"></div>
+            <div id="sunrise_placeholder"></div>
+            <div id="sunset_placeholder"></div>
+            <div id="humidity_placeholder"></div>
+            <div id="pressure_placeholder"></div>
+
+            <div id="DSPrecipitationIntensity_placeholder"></div>
+            <div id="DSCloudCover_placeholder"></div>
+
+            <div id="DSSummary_placeholder"></div>
+            <div id="DSIcon_placeholder"></div>
+            <div id="DSTemperature_placeholder"></div>
+            <div id="DSFeelsLike_placeholder"></div>
+            <div id="DSHumidity_placeholder"></div>
+            <div id="DSWindSpeed_placeholder"></div>
+
+
+        </div>
+    </div>
+
+
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <canvas id="myChart" width="100" height="30"></canvas>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Data</td>
+                            <td>Day 0</td>
+                            <td>Day 1</td>
+                            <td>Day 2</td>
+                            <td>Day 3</td>
+                            <td>Day 4</td>
+                            <td>Day 5</td>
+                            <td>Day 6</td>
+                            <td>Day 7</td>
+                            <td>Day 8</td>
+                            <td>Day 9</td>
+                        </tr>
+                        <tr>
+                            <td>Day</td>
+                            <td id="day0day">&nbsp;</td>
+                            <td id="day1day">&nbsp;</td>
+                            <td id="day2day">&nbsp;</td>
+                            <td id="day3day">&nbsp;</td>
+                            <td id="day4day">&nbsp;</td>
+                            <td id="day5day">&nbsp;</td>
+                            <td id="day6day">&nbsp;</td>
+                            <td id="day7day">&nbsp;</td>
+                            <td id="day8day">&nbsp;</td>
+                            <td id="day9day">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>Date</td>
+                            <td id="day0date">&nbsp;</td>
+                            <td id="day1date">&nbsp;</td>
+                            <td id="day2date">&nbsp;</td>
+                            <td id="day3date">&nbsp;</td>
+                            <td id="day4date">&nbsp;</td>
+                            <td id="day5date">&nbsp;</td>
+                            <td id="day6date">&nbsp;</td>
+                            <td id="day7date">&nbsp;</td>
+                            <td id="day8date">&nbsp;</td>
+                            <td id="day9date">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>Text</td>
+                            <td id="day0text">&nbsp;</td>
+                            <td id="day1text">&nbsp;</td>
+                            <td id="day2text">&nbsp;</td>
+                            <td id="day3text">&nbsp;</td>
+                            <td id="day4text">&nbsp;</td>
+                            <td id="day5text">&nbsp;</td>
+                            <td id="day6text">&nbsp;</td>
+                            <td id="day7text">&nbsp;</td>
+                            <td id="day8text">&nbsp;</td>
+                            <td id="day9text">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>High</td>
+                            <td id="day0high">&nbsp;</td>
+                            <td id="day1high">&nbsp;</td>
+                            <td id="day2high">&nbsp;</td>
+                            <td id="day3high">&nbsp;</td>
+                            <td id="day4high">&nbsp;</td>
+                            <td id="day5high">&nbsp;</td>
+                            <td id="day6high">&nbsp;</td>
+                            <td id="day7high">&nbsp;</td>
+                            <td id="day8high">&nbsp;</td>
+                            <td id="day9high">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>Low</td>
+                            <td id="day0low">&nbsp;</td>
+                            <td id="day1low">&nbsp;</td>
+                            <td id="day2low">&nbsp;</td>
+                            <td id="day3low">&nbsp;</td>
+                            <td id="day4low">&nbsp;</td>
+                            <td id="day5low">&nbsp;</td>
+                            <td id="day6low">&nbsp;</td>
+                            <td id="day7low">&nbsp;</td>
+                            <td id="day8low">&nbsp;</td>
+                            <td id="day9low">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>Code</td>
+                            <td id="day0code">&nbsp;</td>
+                            <td id="day1code">&nbsp;</td>
+                            <td id="day2code">&nbsp;</td>
+                            <td id="day3code">&nbsp;</td>
+                            <td id="day4code">&nbsp;</td>
+                            <td id="day5code">&nbsp;</td>
+                            <td id="day6code">&nbsp;</td>
+                            <td id="day7code">&nbsp;</td>
+                            <td id="day8code">&nbsp;</td>
+                            <td id="day9code">&nbsp;</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p>Powered by <a href="https://darksky.net/poweredby/" target="_blank">Dark Sky</a> and <a href="https://www.yahoo.com/?ilc=401" target="_blank">Yahoo Weather</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!--Add Bootstrap Javascript files-->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!--Add Google Maps Javascript-->
+    <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYBQHjkb3L35qSttFAKDXWxuwb_WshCJk&callback=initMap"async defer></script>-->
+    <!--Add custom Javascript-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+
+    <script type="text/javascript" src="script.js"></script>
+</body>
+
+</html>

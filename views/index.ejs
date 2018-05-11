@@ -142,7 +142,7 @@
                     //hash: false,
                     //showControls: false,
                     showSearch: false,
-                    interactive: false,
+                    //interactive: false,
                     createFlights: false,
                 });
             </script>
@@ -207,9 +207,50 @@
             </div>
 
 
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" id="DSPrecipitationProbability_placeholder"></div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                <% if (typeof(displayDSTemperature) !== 'undefined' && displayDSTemperature >= 35) { %>
+                    <div class="card text-white bg-danger mb-3">
+                        <div class="card-header">Temperature</div>
+                            <div class="card-body">
+                                <h5 class="card-title"><%= displayDSTemperature %>°C</h5>
+                                <p class="card-text">Extremely low or high temperatures are bad for your battery.</p>
+                            </div>
+                    </div>
+                <% } else if (typeof(displayDSTemperature) !== 'undefined' && displayDSTemperature < 35 && displayDSTemperature > 0) { %>
+                    <div class="card text-white bg-success mb-3">
+                        <div class="card-header">Temperature</div>
+                            <div class="card-body">
+                                <h5 class="card-title"><%= displayDSTemperature %>°C</h5>
+                                <p class="card-text">Extremely low or high temperatures are bad for your battery.</p>
+                            </div>
+                    </div>
+                <% } else if (typeof(displayDSTemperature) !== 'undefined' && displayDSTemperature <= 0 && displayDSTemperature > -10) { %>
+                    <div class="card text-white bg-warning mb-3">
+                        <div class="card-header">Temperature</div>
+                            <div class="card-body">
+                                <h5 class="card-title"><%= displayDSTemperature %>°C</h5>
+                                <p class="card-text">Extremely low or high temperatures are bad for your battery.</p>
+                            </div>
+                    </div>
+                <% } else if (typeof(displayDSTemperature) !== 'undefined' && displayDSTemperature <= -10) { %>
+                    <div class="card text-white bg-danger mb-3">
+                        <div class="card-header">Temperature</div>
+                            <div class="card-body">
+                                <h5 class="card-title"><%= displayDSTemperature %>°C</h5>
+                                <p class="card-text">Extremely low or high temperatures are bad for your battery.</p>
+                            </div>
+                    </div>
+                <% } %>
+                </div>
 
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" id="temperature_placeholder"></div>
+
+
+
+
+
+
+
+
 
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" id="visibility_placeholder"></div>
 

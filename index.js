@@ -92,13 +92,6 @@ app.post('/search', function(req, res) {
         
         
         
-        //var skycons = new Skycons({"color": "white"});
-        
-
-
-        //skycons.add(document.getElementById("icon1"), varDSIcon);
-        //skycons.play();
-        console.log(varDSIcon);
         res.render('index.ejs', {displayLocation: varLocation,
                                 displayDSSummary: varDSSummary,
                                 displayDSLastUpdate: varDSLastUpdate,
@@ -106,7 +99,8 @@ app.post('/search', function(req, res) {
                                 displayDSWindSpeed: varDSWindSpeed,
                                 displayChanceOfRain: varChanceOfRain,
                                 displayLatitude: varLatitude,
-                                displayLongitude: varLongitude
+                                displayLongitude: varLongitude,
+                                displayDSTemperature: varDSTemperature
                             });
     });
     });

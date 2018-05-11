@@ -1,0 +1,378 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="manifest" href="/img/site.webmanifest">
+    <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#0077f7">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <meta name="msapplication-TileColor" content="#0077f7">
+    <meta name="msapplication-config" content="/img/browserconfig.xml">
+    <meta name="theme-color" content="#0077f7">
+
+
+
+    <!--Add Normalize.css-->
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+
+    <!--Add Bootstrap 4.0.0 CSS-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!--Add custom CSS-->
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/weather-icons.min.css">
+
+    <!-- Latest minor release -->
+    <script src="https://cdn.airmap.io/js/maps/v2.2/airmap.map.min.js"></script>
+
+    <script src="/scripts/skycons.js"></script>
+
+    <!--Page Title-->
+    <title>Can I Drone?</title>
+</head>
+
+<body>
+
+    <div class="page-header">
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4">Can I Drone?</h1>
+                <p class="lead">Unsure if you should fly your drone today?</p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-sm-12 col-md-12 my-3">
+                <form class="form-inline" action="/search" method="POST">
+                    <div class="col-xs-12 col-sm-12 col-md-12 padding-0 mb-3">
+                      <label for="userLocation" class="sr-only">Location</label>
+                      <input type="text" class="form-control" id="userLocation" name="userLocation" placeholder="Location">
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 padding-0 mb-3">
+                        <label for="userCountry" class="sr-only">Country</label>
+                        <select class="selectpicker form-control" name="userCountry" id="userCountry" data-live-search="true">
+                            <option value="GB" selected="selected">United Kingdom</option>
+                            <option value="US">United States</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2">Can I Drone?</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <div class="container">
+        <div class="row">
+
+
+
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <% if (typeof(displayLocation) !== 'undefined') { %>
+                    <div class="card text-white bg-secondary mb-3">
+                        <div class="card-header"><%= displayLocation %></div>
+                        <div class="card-body">
+                            <h2 class="card-title"><canvas id="icon1" width="38" height="38"></canvas> <%= displayDSSummary %></h2>
+                            <small class="card-text">Data at <%= displayDSLastUpdate %></small>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+
+            <% if (typeof(displayDSIcon) !== 'undefined') { %>
+                <script>
+                    var skycons = new Skycons({"color": "white"});
+                    skycons.add(document.getElementById("icon1"), '<%= displayDSIcon %>');
+                    skycons.play();
+                </script>
+            <% } %>
+
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <% if (typeof(displayLocation) !== 'undefined') { %>
+                    <div class="card text-white bg-primary mb-3">
+                        <div class="card-header">FlySafe Score</div>
+                        <div class="card-body">
+                            <h2 class="card-title">Coming soon</h2>
+                            <p class="card-text">Our FlySafe algorithm is able to score your local weather conditions, maximising the safety of your drone.</p>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+
+
+            
+            <% if (typeof(displayLatitude) !== 'undefined') { %>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="card mb-3" style="height: 50vh;">
+                    <div id="map"></div>
+                </div>
+            </div>
+
+            <script>
+                var config = {
+                    "airmap": { "api_key": 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcmVkZW50aWFsX2lkIjoiY3JlZGVudGlhbHx5NWw2WkRldFFSbTJHQklBZ084bmVmUXF4WU9tIiwiYXBwbGljYXRpb25faWQiOiJhcHBsaWNhdGlvbnxYb25hQVlnZllrYjcwOXR6ekJueDNoNDNiMG9lIiwib3JnYW5pemF0aW9uX2lkIjoiZGV2ZWxvcGVyfE56NERRYjhTcDN5OU04Rm82azc5YUlBR0dtTkwiLCJpYXQiOjE1MjU2ODk3ODl9.BwPZpBxNCcD5Ap88FonpJtqRO7aRDSaa76v1d1unCnQ' },
+                    "mapbox": { "access_token": 'pk.eyJ1IjoibWF0dGdpYmJhcmQiLCJhIjoiY2l6aGI1aTZrMDAyejJxcW5wNWkyaTBzMSJ9.rO41-WferER-6wt9pomX2A' }
+                };
+                var map = new Airmap.Map(config, {
+                    container: 'map',
+                    theme: 'standard',
+                    //useLocation: false,
+                    layers: [ 'airports_recreational', 'airports_commercial', 'airports_recreational_private', 'airports_commercial_private', 'heliports', 'class_b', 'class_c', 'class_d', 'class_e0', 'sua_prohibited', 'sua_restricted', 'tfrs'],
+                    center: [<%= displayLatitude %>, <%= displayLongitude %>],
+                    zoom: 12,
+                    //hash: false,
+                    //showControls: false,
+                    showSearch: false,
+                    interactive: false,
+                    createFlights: false,
+                });
+            </script>
+            <% } %>
+
+
+            
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+            <% if (typeof(displayDSWindSpeed) !== 'undefined' && displayDSWindSpeed >= 5.5) { %>
+                <div class="card text-white bg-danger mb-3">
+                    <div class="card-header">Wind speed</div>
+                    <div class="card-body">
+                        <h5 class="card-title"><%= displayDSWindSpeed %> m/s</h5>
+                        <p class="card-text">Wind will affect the performance and safety of your drone.</p>
+                    </div>
+                </div>
+            <% } else if (typeof(displayDSWindSpeed) !== 'undefined' && displayDSWindSpeed < 5.5 && displayDSWindSpeed >= 4.1) { %>
+                <div class="card text-white bg-warning mb-3">
+                    <div class="card-header">Wind speed</div>
+                    <div class="card-body">
+                        <h5 class="card-title"><%= displayDSWindSpeed %> m/s</h5>
+                        <p class="card-text">Wind will affect the performance and safety of your drone.</p>
+                    </div>
+                </div>
+            <% } else if (typeof(displayDSWindSpeed) !== 'undefined' && displayDSWindSpeed <= 4.0 ){ %>
+                <div class="card text-white bg-success mb-3">
+                    <div class="card-header">Wind speed</div>
+                    <div class="card-body">
+                        <h5 class="card-title"><%= displayDSWindSpeed %> m/s</h5>
+                        <p class="card-text">Wind will affect the performance and safety of your drone.</p>
+                    </div>
+                </div>
+            <% } %>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+            <% if (typeof(displayChanceOfRain) !== 'undefined' && displayChanceOfRain >= 40) { %>
+                <div class="card text-white bg-danger mb-3">
+                    <div class="card-header">Chance of rain</div>
+                    <div class="card-body">
+                        <h5 class="card-title">High: <%= displayChanceOfRain %>%</h5>
+                        <p class="card-text">The probability of rain at this location within the next 60 minutes.</p>
+                    </div>
+                </div>
+            <% } else if (typeof(displayChanceOfRain) !== 'undefined' && displayChanceOfRain < 40 && displayChanceOfRain > 20) { %>
+                <div class="card text-white bg-warning mb-3">
+                    <div class="card-header">Chance of rain</div>
+                    <div class="card-body">
+                        <h5 class="card-title">Medium: <%= displayChanceOfRain %>%</h5>
+                        <p class="card-text">The probability of rain at this location within the next 60 minutes.</p>
+                    </div>
+                </div>
+            <% } else if (typeof(displayChanceOfRain) !== 'undefined' && displayChanceOfRain < 20) { %>
+                <div class="card text-white bg-success mb-3">
+                    <div class="card-header">Chance of rain</div>
+                    <div class="card-body">
+                        <h5 class="card-title">Low: <%= displayChanceOfRain %>%</h5>
+                        <p class="card-text">The probability of rain at this location within the next 60 minutes.</p>
+                    </div>
+                </div>
+            <% } %>
+            </div>
+
+
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" id="DSPrecipitationProbability_placeholder"></div>
+
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" id="temperature_placeholder"></div>
+
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" id="visibility_placeholder"></div>
+
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" id="DSStormDistance_placeholder"></div>
+
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" id="DSCloudCover_placeholder"></div>
+
+
+
+        </div>
+    </div>
+
+
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="DSFutureRainfall_placeholder">
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <!--
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Data</th>
+                            <th scope="col">Day 0</th>
+                            <th scope="col">Day 1</th>
+                            <th scope="col">Day 2</th>
+                            <th scope="col">Day 3</th>
+                            <th scope="col">Day 4</th>
+                            <th scope="col">Day 5</th>
+                            <th scope="col">Day 6</th>
+                            <th scope="col">Day 7</th>
+                            <th scope="col">Day 8</th>
+                            <th scope="col">Day 9</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td scope="row">Day</td>
+                            <td id="day0day">&nbsp;</td>
+                            <td id="day1day">&nbsp;</td>
+                            <td id="day2day">&nbsp;</td>
+                            <td id="day3day">&nbsp;</td>
+                            <td id="day4day">&nbsp;</td>
+                            <td id="day5day">&nbsp;</td>
+                            <td id="day6day">&nbsp;</td>
+                            <td id="day7day">&nbsp;</td>
+                            <td id="day8day">&nbsp;</td>
+                            <td id="day9day">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td scope="row">Date</td>
+                            <td id="day0date">&nbsp;</td>
+                            <td id="day1date">&nbsp;</td>
+                            <td id="day2date">&nbsp;</td>
+                            <td id="day3date">&nbsp;</td>
+                            <td id="day4date">&nbsp;</td>
+                            <td id="day5date">&nbsp;</td>
+                            <td id="day6date">&nbsp;</td>
+                            <td id="day7date">&nbsp;</td>
+                            <td id="day8date">&nbsp;</td>
+                            <td id="day9date">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td scope="row">Text</td>
+                            <td id="day0text">&nbsp;</td>
+                            <td id="day1text">&nbsp;</td>
+                            <td id="day2text">&nbsp;</td>
+                            <td id="day3text">&nbsp;</td>
+                            <td id="day4text">&nbsp;</td>
+                            <td id="day5text">&nbsp;</td>
+                            <td id="day6text">&nbsp;</td>
+                            <td id="day7text">&nbsp;</td>
+                            <td id="day8text">&nbsp;</td>
+                            <td id="day9text">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td scope="row">High</td>
+                            <td id="day0high">&nbsp;</td>
+                            <td id="day1high">&nbsp;</td>
+                            <td id="day2high">&nbsp;</td>
+                            <td id="day3high">&nbsp;</td>
+                            <td id="day4high">&nbsp;</td>
+                            <td id="day5high">&nbsp;</td>
+                            <td id="day6high">&nbsp;</td>
+                            <td id="day7high">&nbsp;</td>
+                            <td id="day8high">&nbsp;</td>
+                            <td id="day9high">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td scope="row">Low</td>
+                            <td id="day0low">&nbsp;</td>
+                            <td id="day1low">&nbsp;</td>
+                            <td id="day2low">&nbsp;</td>
+                            <td id="day3low">&nbsp;</td>
+                            <td id="day4low">&nbsp;</td>
+                            <td id="day5low">&nbsp;</td>
+                            <td id="day6low">&nbsp;</td>
+                            <td id="day7low">&nbsp;</td>
+                            <td id="day8low">&nbsp;</td>
+                            <td id="day9low">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td scope="row">Code</td>
+                            <td id="day0code">&nbsp;</td>
+                            <td id="day1code">&nbsp;</td>
+                            <td id="day2code">&nbsp;</td>
+                            <td id="day3code">&nbsp;</td>
+                            <td id="day4code">&nbsp;</td>
+                            <td id="day5code">&nbsp;</td>
+                            <td id="day6code">&nbsp;</td>
+                            <td id="day7code">&nbsp;</td>
+                            <td id="day8code">&nbsp;</td>
+                            <td id="day9code">&nbsp;</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+    //-->
+
+
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p>Created by Matt Gibbard - <a href="https://twitter.com/MattGibbard" target="_blank">Twitter</a> - <a href="https://www.linkedin.com/in/mattgibbard/" target="_blank">LinkedIn</a></p>
+            </div>
+            <div class="col-md-12">
+                <p>Powered by <a href="https://darksky.net/poweredby/" target="_blank">Dark Sky</a> and <a href="https://developers.google.com/maps/documentation/geocoding/start" target="_blank">Google</a></p>
+            </div>
+        </div>
+    </div>
+
+
+    <!--Add Bootstrap Javascript files-->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <!--Add custom Javascript-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+    <script type="text/javascript" src="/scripts/script.js"></script>
+
+</body>
+
+</html>

@@ -91,7 +91,7 @@
                     <div class="card text-white bg-secondary mb-3">
                         <div class="card-header"><%= displayLocation %></div>
                         <div class="card-body">
-                            <h2 class="card-title"><canvas id="icon1" width="38" height="38"></canvas> <%= displayDSSummary %></h2>
+                            <h2 class="card-title"><canvas class="skycon" id="icon1" width="76" height="76"></canvas> <%= displayDSSummary %></h2>
                             <small class="card-text">Data at <%= displayDSLastUpdate %></small>
                         </div>
                     </div>
@@ -140,9 +140,9 @@
                     center: [<%= displayLatitude %>, <%= displayLongitude %>],
                     zoom: 12,
                     //hash: false,
-                    //showControls: false,
+                    showControls: false,
                     showSearch: false,
-                    //interactive: false,
+                    interactive: false,
                     createFlights: false,
                 });
             </script>
@@ -395,10 +395,13 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <p>Created by Matt Gibbard - <a href="https://twitter.com/MattGibbard" target="_blank">Twitter</a> - <a href="https://www.linkedin.com/in/mattgibbard/" target="_blank">LinkedIn</a></p>
+                <small>All of the information on this site is gathered from other data sources and should not be used to guarantee flight legality or success. This information is to be used as your own risk. Drone laws vary by country and region, so it's essential to research the specific requirements in your area before every flight.</small>
             </div>
             <div class="col-md-12">
-                <p>Powered by <a href="https://darksky.net/poweredby/" target="_blank">Dark Sky</a> and <a href="https://developers.google.com/maps/documentation/geocoding/start" target="_blank">Google</a></p>
+                <p>Powered by <a href="https://www.airmap.com/" target="_blank">AirMap</a>, <a href="https://darksky.net/poweredby/" target="_blank">Dark Sky</a> and <a href="https://developers.google.com/maps/documentation/geocoding/start" target="_blank">Google</a></p>
+             </div>
+            <div class="col-md-12">
+                <p>Created by Matt Gibbard - <a href="https://twitter.com/MattGibbard" target="_blank">Twitter</a> - <a href="https://www.linkedin.com/in/mattgibbard/" target="_blank">LinkedIn</a></p>
             </div>
         </div>
     </div>

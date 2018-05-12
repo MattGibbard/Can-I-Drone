@@ -246,17 +246,95 @@
 
 
 
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                        <% if (typeof(displayDSVisibility) !== 'undefined' && displayDSVisibility >= 10) { %>
+                            <div class="card text-white bg-success mb-3">
+                                    <div class="card-header">Visibility</div>
+                                        <div class="card-body">
+                                            <h5 class="card-title"><%= displayDSVisibility %>km</h5>
+                                            <p class="card-text">Poor visibility will block the line of sight (LOS) to your drone.</p>
+                                        </div>
+                                    </div>
+                        <% } else if (typeof(displayDSVisibility) !== 'undefined' && displayDSVisibility < 10 && displayDSVisibility > 5) { %>
+                            <div class="card text-white bg-warning mb-3">
+                                    <div class="card-header">Visibility</div>
+                                        <div class="card-body">
+                                            <h5 class="card-title"><%= displayDSVisibility %>km</h5>
+                                            <p class="card-text">Poor visibility will block the line of sight (LOS) to your drone.</p>
+                                        </div>
+                                    </div>
+                        <% } else if (typeof(displayDSVisibility) !== 'undefined' && displayDSVisibility <= 5 && displayDSVisibility > -100) { %>
+                            <div class="card text-white bg-danger mb-3">
+                                    <div class="card-header">Visibility</div>
+                                        <div class="card-body">
+                                            <h5 class="card-title"><%= displayDSVisibility %>km</h5>
+                                            <p class="card-text">Poor visibility will block the line of sight (LOS) to your drone.</p>
+                                        </div>
+                                    </div>
+                        <% } %>
+                </div>
+
+
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                        <% if (typeof(displayDSStormDistance) !== 'undefined' && displayDSStormDistance >= 10) { %>
+                            <div class="card text-white bg-success mb-3">
+                                    <div class="card-header">Nearest rainfall</div>
+                                        <div class="card-body">
+                                            <h5 class="card-title"><%= displayDSStormDistance %>km</h5>
+                                            <p class="card-text">Nearby rain or winds may drift into your flight path.</p>
+                                        </div>
+                                    </div>
+                        <% } else if (typeof(displayDSStormDistance) !== 'undefined' && displayDSStormDistance < 10 && displayDSStormDistance > 5) { %>
+                            <div class="card text-white bg-warning mb-3">
+                                    <div class="card-header">Nearest rainfall</div>
+                                        <div class="card-body">
+                                            <h5 class="card-title"><%= displayDSStormDistance %>km</h5>
+                                            <p class="card-text">Nearby rain or winds may drift into your flight path.</p>
+                                        </div>
+                                    </div>
+                        <% } else if (typeof(displayDSStormDistance) !== 'undefined' && displayDSStormDistance <= 5 && displayDSStormDistance > -100) { %>
+                            <div class="card text-white bg-danger mb-3">
+                                    <div class="card-header">Nearest rainfall</div>
+                                        <div class="card-body">
+                                            <h5 class="card-title"><%= displayDSStormDistance %>km</h5>
+                                            <p class="card-text">Nearby rain or winds may drift into your flight path.</p>
+                                        </div>
+                                    </div>
+                        <% } %>
+                </div>
+
+
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                        <% if (typeof(displayCloudPercent) !== 'undefined' && displayCloudPercent >= 60) { %>
+                            <div class="card text-white bg-danger mb-3">
+                                    <div class="card-header">Cloud coverage</div>
+                                        <div class="card-body">
+                                            <h5 class="card-title"><%= displayCloudPercent %>%</h5>
+                                            <p class="card-text">Thick cloud coverage may affect drone visibility and signal.</p>
+                                        </div>
+                                    </div>
+                        <% } else if (typeof(displayCloudPercent) !== 'undefined' && displayCloudPercent < 60 && displayCloudPercent > 40) { %>
+                            <div class="card text-white bg-warning mb-3">
+                                    <div class="card-header">Cloud coverage</div>
+                                        <div class="card-body">
+                                            <h5 class="card-title"><%= displayCloudPercent %>%</h5>
+                                            <p class="card-text">Thick cloud coverage may affect drone visibility and signal.</p>
+                                        </div>
+                                    </div>
+                        <% } else if (typeof(displayCloudPercent) !== 'undefined' && displayCloudPercent <= 40 && displayCloudPercent > -1) { %>
+                            <div class="card text-white bg-success mb-3">
+                                    <div class="card-header">Cloud coverage</div>
+                                        <div class="card-body">
+                                            <h5 class="card-title"><%= displayCloudPercent %>%</h5>
+                                            <p class="card-text">Thick cloud coverage may affect drone visibility and signal.</p>
+                                        </div>
+                                    </div>
+                        <% } %>
+                </div>
 
 
 
 
-
-
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" id="visibility_placeholder"></div>
-
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" id="DSStormDistance_placeholder"></div>
-
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" id="DSCloudCover_placeholder"></div>
 
 
 

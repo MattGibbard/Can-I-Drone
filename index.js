@@ -73,6 +73,7 @@ app.post('/search', function(req, res) {
         var varDSVisibility = (varWeather.currently.visibility);
 
         var varChanceOfRain = Math.round((varDSPrecipitationProbability * 100));
+        var varCloudPercent = Math.round((varDSCloudCover * 100));
 
         var varDS0 = (varWeather.hourly.data[0].precipIntensity);
         var varDS1 = (varWeather.hourly.data[1].precipIntensity);
@@ -100,7 +101,10 @@ app.post('/search', function(req, res) {
                                 displayChanceOfRain: varChanceOfRain,
                                 displayLatitude: varLatitude,
                                 displayLongitude: varLongitude,
-                                displayDSTemperature: varDSTemperature
+                                displayDSTemperature: varDSTemperature,
+                                displayDSVisibility: varDSVisibility,
+                                displayDSStormDistance: varDSStormDistance,
+                                displayCloudPercent: varCloudPercent
                             });
     });
     });

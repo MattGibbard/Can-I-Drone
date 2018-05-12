@@ -32,4 +32,20 @@
     height: 38px; 
 }
 
+h1 a:link {
+    color:#ffffff;
+}
+
+h1 a:visited {
+    color:#ffffff;
+}
+
+h1 a:hover {
+    color:#ffffff;
+    text-decoration: none;
+}
+
+h1 a:active {
+    color:#ffffff;
+}
 

@@ -1,3 +1,76 @@
+body{ margin:0px 0px; }
+
+
+
+
+
+h1 a{
+        font-family: 'Roboto', sans-serif;
+        font-size: 2em;
+    }
+
+#hero{
+    background-image:url(/img/Lonely-Blue.jpg);
+    background-size:cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position:relative;
+    height:100vh;
+
+  }
+
+  #hero span{
+    position:absolute;
+    width: 100%;
+    text-align: center;
+    bottom:0;
+    color: #fff;
+
+  }
+
+  #hero span .powered{
+    font-size: 12px;
+  }
+
+  #hero span .powered a{
+    color: #fff;
+  }
+
+  #hero span .powered a:hover{
+    opacity: 0.8;
+  }
+
+  #hero span .icons a{
+    color: #fff;
+    font-size: 38px;
+  }
+
+  #hero span .icons a:hover{
+    opacity: 0.8;
+  }
+
+  
+  .header {
+    position:absolute;
+    top:50%;
+
+    width:100%;
+    color:#fff;
+    font-size:24px;
+    -ms-transform: translate(0,-50%); /* IE 9 */
+      -webkit-transform: translate(0,-50%); /* Safari */
+      transform: translate(0,-50%);  
+  
+  }
+
+  .header .middle-hero {
+    text-align:center;
+    text-shadow: 20px 5px 25px #000000;
+  }
+
+
+
+
 .padding-0{
     padding-right:0;
     padding-left:0;
@@ -43,6 +116,7 @@ h1 a:visited {
 h1 a:hover {
     color:#ffffff;
     text-decoration: none;
+    opacity: 0.8;
 }
 
 h1 a:active {

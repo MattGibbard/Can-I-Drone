@@ -1,7 +1,5 @@
 
 
-
-
 function loadWeather(click) {
     console.log("Can I Drone? button clicked");
 

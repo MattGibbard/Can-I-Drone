@@ -1,22 +1,17 @@
 body{ margin:0px 0px; }
 
-
-
-
-
 h1 a{
         font-family: 'Roboto', sans-serif;
         font-size: 2em;
     }
 
 #hero{
-    background-image:url(/img/Lonely-Blue.jpg);
+    background-image:url(/img/drone.jpg);
     background-size:cover;
     background-position: center;
     background-repeat: no-repeat;
     position:relative;
     height:100vh;
-
   }
 
   #hero span{
@@ -123,3 +118,51 @@ h1 a:active {
     color:#ffffff;
 }
 
+
+
+
+/* xs < 768 */
+@media screen and (max-width: 767px) {
+    body {
+        font-size: 0.9em;
+    }
+
+    #hero .header h1 {
+        font-size: 1em;
+    }
+
+    #hero p {
+        font-size: 0.7em;
+    }
+
+    .form {
+        padding: 0px 15px;
+    }
+
+    #hero span{
+        bottom:40px;
+    }
+
+}
+
+/* sm */
+@media screen and (min-width: 768px) {
+    body {
+        font-size: 1em;
+    }
+    
+}
+
+/* md */
+@media screen and (min-width: 992px) {
+    body {
+        font-size: 1.0em;
+    }
+}
+
+/* lg */
+@media screen and (min-width: 1200px) {
+    body {
+        font-size: 1.0em;
+    }
+}
